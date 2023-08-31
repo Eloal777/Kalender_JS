@@ -1,0 +1,364 @@
+CSS body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+        "header header"
+        "header1 header1"
+        "kalenderblatt infotext"
+        "kalenderblatt historie"
+        "footer footer";
+
+
+}
+
+section#header {
+    grid-area: auto
+}
+
+section#header1 {
+    grid-area: auto;
+}
+
+section.kalenderblatt {
+    grid-area: kalenderblatt;
+}
+
+section#historie {
+    grid-area: auto;
+}
+
+section#infotext {
+    grid-area: auto;
+}
+
+section#footer {
+    grid-area: auto;
+}
+
+#randversuch {
+    border-width: 2px;
+    border-color: rgb(162, 162, 163);
+    border-style: outset;
+    border-radius: 18px;
+    -webkit-box-shadow: -2px 2px 4px 1px #000000;
+    box-shadow: -2px 2px 4px 1px #000000;
+    background-image: url("hb2.jpg");
+    background-size: cover;
+}
+
+#alles {
+		font-size: xx-large;
+		color: azure;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-align: center;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 25px rgb(255, 255, 255);
+}
+
+thead {
+    border-width: 1px;
+    border-color: black;
+    border-style: groove;
+    width: 35;
+    height: 60px;
+}
+
+
+table h1 {
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    margin: 0;
+    border-radius: 18px
+}
+
+
+#MonatHeader {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+#left {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: start;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(255, 255, 255);
+    text-shadow: 0 0 25px rgb(0, 0, 0);
+    background-color: hsla(240, 50%, 50%, 50%);
+    transition: background-color 0.4s;
+}
+
+#left:hover
+
+/* Eigenschaften beim Überfahren mit der Maus */
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    /* Neue Farbe */
+}
+
+#middle {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(255, 255, 255);
+    text-shadow: 0 0 25px rgb(0, 0, 0);
+    background-color: hsla(240, 50%, 50%, 50%);
+    transition: background-color 0.4s;
+}
+#middle:hover
+
+/* Eigenschaften beim Überfahren mit der Maus */
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    /* Neue Farbe */
+}
+
+
+/* #right {font-size: 30px;font-weight: bold;  text-align: end; color: rgb(255, 255, 255); font-family: sans-serif; text-shadow: 0 0 25px rgb(255, 255, 255); background-color: hsla(240, 50%, 50%, 50%);
+    text-shadow: 0 0 25px rgb(0, 0, 0); */
+/* } */
+#right {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: end;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(255, 255, 255);
+    background-color: hsla(240, 50%, 50%, 0.5);
+    text-shadow: 0 0 25px rgb(0, 0, 0);
+    transition: background-color 0.4s;
+    /* Animierte Änderung der Eigenschaft background-color */
+}
+
+#right:hover
+
+/* Eigenschaften beim Überfahren mit der Maus */
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    /* Neue Farbe */
+}
+
+.wejuli {
+    color: red;
+    font-size: 10px;
+    font-weight: bold;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    border-radius: 10px;
+    font-family: sans-serif;
+    transition: background-color 0.4s;
+}
+.wejuli:hover
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    }
+
+.we1 {
+    color: rgb(203, 243, 93);
+    font-weight: bold;
+    border-width: 1px;
+    border-color: black;
+    border-style:solid;
+    background-color: hsla(240, 50%, 50%, 50%);
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(0, 0, 0);
+    transition: background-color 0.4s;
+}
+.we1:hover
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    }
+.we {
+    color: rgb(255, 0, 0);
+    font-size: 20px;
+    font-weight: bold;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    background-color: hsla(240, 50%, 50%, 50%);
+    border-radius: 10px;
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(0, 0, 0);
+    transition: background-color 0.4s;
+}
+.we:hover
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    }
+
+
+.samstag {
+    color: rgb(203, 243, 93);
+    font-size: 30px;
+    font-weight: bold;
+    border-style: solid;
+    background-color: hsla(240, 50%, 50%, 50%);
+    text-align: justify;
+    text-align: center;
+    border-radius: 10px;
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(255, 255, 255);
+    transition: background-color 0.4s;
+}
+.samstag:hover
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    }
+.sonntag {
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+    border-width: 1px;
+    border-color: black;
+    background-color: hsla(240, 50%, 50%, 50%);
+    border-style: solid;
+    text-align: center;
+    border-radius: 10px;
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(255, 255, 255);
+    transition: background-color 0.4s;
+}
+.sonntag:hover
+    {
+    background-color: rgba(241, 245, 10, 0.822);
+    }
+
+.ausmonat {
+    color: rgb(204, 203, 203);
+    font-size: 20px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    border-radius: 10px;
+    text-shadow: 0 0 15px rgb(255, 253, 253);
+    font-family: sans-serif;
+    background-color: hsla(240, 50%, 50%, 50%);
+    transition: background-color 0.4s;
+}
+.ausmonat:hover {   
+    background-color: rgba(17, 0, 250, 0.658);
+}
+
+.wochentage {
+    font-weight: bold;
+    font-size: 30px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    border-radius: 10px;
+    text-shadow: 0 0 25px rgb(0, 0, 0);
+    font-family: sans-serif;
+    color: white;
+    background-color: hsla(240, 50%, 50%, 50%);
+    transition: background-color 0.4s;
+}
+.wochentage:hover {   
+    background-color: rgba(241, 245, 10, 0.822);
+}
+
+
+
+/* #infotext{position: relative; 
+    width: 500px;
+    height: 100px;
+} */
+#he {
+    font-size: "25px";
+    font-weight: bold;
+    color: rgb(243, 253, 156);
+    font-family: sans-serif;
+}
+
+#infotext {
+    font-size: 20px;
+    margin-left: 20px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: #8eaaf7;
+}
+
+#footer {
+    position: relative;
+    bottom: -1000px;
+    left: -1270px;
+}
+
+#kalender {
+    height: 600px;
+    width: 1000px;
+    border-width: 1px;
+    border-color: black;
+    border-style: inset;
+    position: left;
+    border-radius: 10px;
+    -webkit-box-shadow: -2px 2px 4px 1px #000000;
+    box-shadow: -2px 2px 4px 1px #000000;
+    transition: background-color 0.4s;
+}
+#kalender:hover {   
+    background-color: hsla(240, 50%, 50%, 1);
+}
+
+
+.tage {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-width: 1px;
+    border-color: black;
+    background-color: hsla(240, 50%, 50%, 50%);
+    border-style: solid;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: sans-serif;
+    text-shadow: 0 0 25px rgb(255, 255, 255);
+    transition: background-color 0.4s;
+}
+.tage:hover {   
+    background-color: rgba(241, 245, 10, 0.822);
+}
+
+.wzahl {
+    color: rgb(209, 207, 207);
+    font-size: 20px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    background-color: hsla(240, 50%, 50%, 50%);
+    text-align: center;
+    border-radius: 10px;
+    text-shadow: 0 0 35px rgb(255, 255, 255);
+    font-family: sans-serif;
+    transition: background-color 0.4s;
+}
+.wzahl:hover {   
+    background-color: rgba(17, 0, 250, 0.658);
+}
+
+
+
+
+/* #header{position: static; background-color: #80b2fc9c; border:1px solid #0000009c;text-align: left;}
+#header1{position: static; background-color: #80b2fc9c; border:1px solid #0000009c;font-size: x-large;} */
+/* #kalenderblatt{position: relative; font-size: larger;text-align: center;}
+#infotext{text-align: left; position: bottom;} */
