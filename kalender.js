@@ -1,38 +1,37 @@
 window.onload = function () { //Hinweis dass erst gewartet werden soll bis die Seite geladen ist.
-	updateKalender(new Date(2023,9,1));
+	updateKalender(new Date());
 };
 
 
 
 function updateKalender(nDate) {   //Hauptfunktion in der die meisten Variablen stehen
-	let date = nDate; //Aktuelles Datum mit Uhrzeit 
+	let date = new Date(nDate); //Aktuelles Datum mit Uhrzeit 
 	let dateD = date.getDate(); // Heutiges Datum
 	let weekdayD = date.getDay(); //wochentag Nummer
 	let weekdayGerman = getWeekDayNameGerman(weekdayD); //Wochentag auf Deutsch in String, Funktion ist definiert unt ist weiter unten im Code
-	console.log(weekdayGerman); //Konsole ausgabe
+	// console.log(weekdayGerman); //Konsole ausgabe
 	let startDate = new Date(date.getFullYear(), 0, 1); //Startdtatum der Berechnung
 	let days = Math.floor((date - startDate) / (24 * 60 * 60 * 1000)); //Aktuelles Datum minus Startdatum
-	console.log(days + 1);
+	// console.log(days + 1);
 	let weekNumber = Math.ceil(days / 7); //Wochennummer = Mathezeile (days und dann durch 7)
 	let monthD = date.getMonth(); //Aktueller Monat als Zahl
 	let monthsInGerman = getMonthsInGerman(monthD); //Monatsname auf Deutsch in String
-	console.log(monthsInGerman); // Konsolen ausgabe Monatsname
+	// console.log(monthsInGerman); // Konsolen ausgabe Monatsname
 	let year = date.getFullYear(); //Aktuelles Jahr
 	let datum = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear(); //Datum Tag, Monat, Jahr
-	let dHowManyWeekday = getDHowManyWeekday(dateD); // Eine Funktion ist dafür definiert und gibt aus wievielte Woche im Monat wir haben
-	let holidaysList = getHolidayArrayHessen(date); // Eine Funktion die die Feiertage in Hessen berechnet und Anzeigt
-	let holidayYesNoD = isDateHoliday(date, holidaysList); // Eine funktion die nachschaut ob heute ein feiertag ist
+	let dHowManyWeekday = getDHowManyWeekday(dateD); // Eine Funktion ist dafür definiert und gibt aus wievielte Woche im Monat wir haben // Eine Funktion die die Feiertage in Hessen berechnet und Anzeigt
+	let holidayYesNoD = isDateHoliday(date); // Eine funktion die nachschaut ob heute ein feiertag ist
 	document.getElementById("calendar").innerHTML = getCalendarForHTML(date);
 
 	//*Consolen ausgaben
-	console.log(dHowManyWeekday); // Konsole ausabe wievielte Woche im Monat
-	console.log("hololidayYesNoD: " + holidayYesNoD) // Konsole Befehle die ausgeben wie in diesem Fall mit hilfe der Funktion holidayYesNoD ob es ein Feiertag ist oder nicht
-	console.log('date: ' + date);
-	console.log('weekdayD:' + date.getDay());
-	console.log('Week number of: ' + date + "is: " + weekNumber);
-	console.log('monthD:' + monthD);
-	console.log('year:' + date.getFullYear());
-	console.log('holidayYesNoD:');
+	// console.log(dHowManyWeekday); // Konsole ausabe wievielte Woche im Monat
+	// console.log("hololidayYesNoD: " + holidayYesNoD) // Konsole Befehle die ausgeben wie in diesem Fall mit hilfe der Funktion holidayYesNoD ob es ein Feiertag ist oder nicht
+	// console.log('date: ' + date);
+	// console.log('weekdayD:' + date.getDay());
+	// console.log('Week number of: ' + date + "is: " + weekNumber);
+	// console.log('monthD:' + monthD);
+	// console.log('year:' + date.getFullYear());
+	// console.log('holidayYesNoD:');
 
 	let kalenderAufbauHtml = getCalendarForHTML(date); // Eine Variable für die Funktion die den ganzen Kalendr in HTML aufbaut. 
 	//!In dieser Zeile ist der Kalender
@@ -150,8 +149,9 @@ function getWeekdayShortGerman(weekdayIndex) {  // Deutsche Wochentage kurzfassu
 	return arr[weekdayIndex];
 }
 
-function isDateHoliday(date, holidaysList) {  //Funktion die vergleicht mit einer for Schleife ist heute Feiertag.
+function isDateHoliday(date) {  //Funktion die vergleicht mit einer for Schleife ist heute Feiertag.
 
+	let holidaysList = getHolidayArrayHessen(date);
 	let output = false;
 
 	for (let I = 0; I < holidaysList.length; I++) {
@@ -220,17 +220,20 @@ function getEasterSunday(year) {
 
 
 // Aufgabe für Montag
+// html +=         `<button onclick="updateKalender(${new Date(date.getFullYear(),date.getMonth()-1,1).getTime()})">Vorheriger Monat</button>`;
+// html +=         `<button onclick="changeTime(${new Date(date.getFullYear(),date.getMonth()-1,1).getTime()})">Vorheriger Monat</button>`;
 
-function getCalendarForHTML(date,) {
+let date = new Date();
+function getCalendarForHTML(date) {
 	let html = '<table id="kalender">';
 	let cssClass = '<#kalender>';
 	html += '<thead>';
 	html += '<tr>';
 	html += '<div id="MonatHeader">';
 	html += '<th colspan="8">';
-	html += '<button id ="left" button onclick="myFunction()">⇦ Letzter Monat</button>';
-	html += `<button id ="middle" button onclick = "isFeiertag(3)"> ${getMonthsInGerman(date.getMonth())} </button>`;
-	html += '<button id="right" button onclick="myFunction()"><span id = "nextMonth">Nächster Monat⇨</span></button>';
+	html += `<button id ="left" onclick="updateKalender(${new Date(date.getFullYear(),date.getMonth()-1,1).getTime()})">⇦ Letzter Monat</button>`;
+	html += `<button id ="middle" onclick = "isFeiertag(3)"> ${getMonthsInGerman(date.getMonth())} </button>`;
+	html += `<button id="right" onclick="updateKalender(${new Date(date.getFullYear(),date.getMonth()+1,1).getTime()})">Nächster Monat⇨</button>`;
 	// html += '<th class="tage">Kw &ensp; </th>';
 	html += '</div>';
 	html += '</th>';
@@ -249,9 +252,15 @@ function getCalendarForHTML(date,) {
 	html += '<tbody>';
 
 
+let last_date = new Date(date.getFullYear(),date.getMonth(),(date.getDate()-1));
 
-
-
+for (z=0; z > last_date; z++) {
+let today = new Date(date.getDate());
+				if (today ==today) {
+					today.bgColor="white";// Heutiger Tag als Rot
+					html += "today";
+				}
+			}
 
 
 
@@ -272,11 +281,16 @@ function getCalendarForHTML(date,) {
 	// Tag 1 der Tabelle beziehungsweise Tage vor neuem Monat 
 	for (let i = tageausVormonatZuzeichnen; i > 0; i--) {
 		let day = new Date(date.getFullYear(), date.getMonth(), 1 - i);
+		let classTags =""; //Die Brauchst du KlassenNamen
 		if (day.getDate() == 1) {
 			html += '<tr>';
 		}
-
-		html += '<td class = "wochentage">';
+		
+		
+		
+		
+		classTags += " ausmonat"
+		html += `<td class=${classTags} onclick="updateKalender(${day.getTime()})">`;
 		html += day.getDate();
 		html += '</td>';
 		// tempDate = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate() + 1);
@@ -286,16 +300,36 @@ function getCalendarForHTML(date,) {
 		}
 	}
 
-
-	// Tage der Tabelle 1-31 ;
+	// Tage der Tabelle 1-31 ; Kompletter Code
 	for (let i = 1; i <= days; i++) {
+		let classTags =""; //Die Brauchst du KlassenNamen
 		let datum = new Date(date.getFullYear(), date.getMonth(), i);
-		if (datum.getDay() == 1) {
+		if (datum.getDay() == 1) {  
 			html += '<tr>';
 		}
+		if (datum.getDay() ==0){ // Das brauchst du Prüfung ob Heute Tag 0 ist Sonntag
+			classTags += " sonntag" // Wiedergabe KlassenName den du dann im CSS bearbiten wirst davor leerzeichen nicht vergessen bevor Namen _Sonntag schreibst
+
+		}
+		if (datum.getDay() ==6){ // Das brauchst du Prüfung ob Heute Tag 6 ist Samstag
+			classTags += " samstag" // Wiedergabe KlassenName den du dann im CSS bearbiten wirst davor leerzeichen nicht vergessen bevor Namen _Sonntag schreibst
+
+		}
+		if (isDateHoliday(datum)){
+			classTags += " holidays"
+		}
+		// if (tageausVormonatZuzeichnen() != i){
+		// 	classTags += " ausmonat"
+		// }
 
 
-		html += '<td class = "wochentage">';
+		else  { //Wenn der Tag nicht Sonntag, Samstag, Holidays ist dann nimmt er die Klasse _Wochentage
+			classTags += " wochentage"
+}
+		
+
+
+		html += `<td class=${classTags} onclick="updateKalender(${new Date(datum.getFullYear(),datum.getMonth(),i).getTime()})">`; // Wenn du Klassen in HTML einfügst vergiss diese komischen klammern nicht ``
 		html += i;
 		html += '</td>';
 		// tempDate = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate() + 1);
@@ -321,11 +355,15 @@ let wochenTag = date.getDay();
 
 let lastWeekdayThisMonth = new Date(date.getFullYear(), date.getMonth()+ 1, 0).getDay();
 let daysToDrawAfter = (7 - lastWeekdayThisMonth) % 7;
-let day = date.getDate();
-
+let day = new Date(date.getFullYear(), date.getMonth(), 1 - daysToDrawAfter);
 for (let i = 1; i <= + daysToDrawAfter; i++) {
+
+
 	
-	html += '<td class = "wochentage">';
+let classTags = "";
+let datum = new Date(date.getFullYear(), date.getMonth() +1 , i);
+classTags += " ausmonat"
+	html += `<td class=${classTags} onclick="updateKalender(${datum.getTime()})">`;
 	html += i;
 	html += "</td>";
 }
@@ -335,246 +373,3 @@ html += '</tbody>'
 html += '</table>';
 return html;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 	function createCalender(elem, year, month){
-// 	elem = document.querySelector(elem)
-
-
-
-// let mon = month - 1;
-// let d = new Date(year, mon);
-
-
-// for (let i =0; i>getDay(d); i++){
-// 	html += "<td></td>"  
-// }
-
-// while (d.getMonth() == mon){
-// 		html += "<td>" + d.getDate() + "</td>"
-// 	if (getDay(d) % 7 == 6){
-// 		html += "</tr><tr>"
-// 	}
-// 	d.setDate(d.getDate() +1)
-
-// }
-
-
-// 	if(getDay(d) != 0) {
-// 		for (let i = getDay; i<7; i++){
-// 			html += "<td></td>";  
-// 		}
-
-// 	}
-// 		html += "</tr>";
-
-
-// function getDay(date){
-// 	let day = date.getDay();
-// 	if(day == 0) day = 7;
-// 	return day-1;
-// }
-// // createCalendar("body",2020,7)
-// }
-
-
-
-
-
-
-
-
-	// for (let i = 0; i < 3; i++) {
-	// 	if (lastOfMonth == 1) {
-	// 		html += '<tr>';
-	// 	}
-	// 					html += '<td class = "wochentage">';
-	// 					html += lastOfMonth;
-	// 					html += "</td>";
-
-	// 	if (lastOfMonth == 1) {
-	// 		html += '</tr>';
-	// 	}
-	// }
-
-
-
-
-
-
-
-
-
-
-	// html += '<tr class="kalenderblatt">';
-	// html += '<td class="wzahl">31</td>';
-	// html += '<td class="ausmonat">31</td>';
-	// html += '<td class="wochentage">01</td>';
-	// html += '<td class="wochentage">02</td>';
-	// html += '<td class="wochentage">03</td>';
-	// html += '<td class="wochentage">04</td>';
-	// html += '<td class="samstag wejuli">05</td>';
-	// html += '<td class="sonntag wejuli">06</td>';
-	// html += '</tr>';
-	// html += '<tr class="kalenderblatt">';
-	// html += '<td class="wzahl">32</td>';
-	// html += '<td class="wochentage">07</td>';
-	// html += '<td class="wochentage">08</td>';
-	// html += '<td class="wochentage">09</td>';
-	// html += '<td class="wochentage">10</td>';
-	// html += '<td class="wochentage">11</td>';
-	// html += '<td class="samstag wejuli">12</td>';
-	// html += '<td class="sonntag wejuli">13</td>';
-	// html += '</tr>';
-	// html += '<tr class="kalenderblatt">';
-	// html += '<td class="wzahl">33</td>';
-	// html += '<td class="wochentage">14</td>';
-	// html += '<td class="wochentage">15</td>';
-	// html += '<td class="wochentage">16</td>';
-	// html += '<td class="wochentage">17</td>';
-	// html += '<td class="wochentage">18</td>';
-	// html += '<td class="samstag wejuli">19</td>';
-	// html += '<td class="sonntag wejuli">20</td>';
-	// html += '</tr>';
-	// html += '<tr class="kalenderblatt">';
-	// html += '<td class="wzahl">34</td>';
-	// html += '<td class="wochentage">21</td>';
-	// html += '<td class="wochentage">22</td>';
-	// html += '<td class="wochentage">23</td>';
-	// html += '<td class="wochentage">24</td>';
-	// html += '<td class="wochentage" id = "today">25</td>';
-	// html += '<td class="samstag wejuli">26</td>';
-	// html += '<td class="sonntag wejuli">27</td>';
-	// html += '</tr>';
-	// html += '<tr class="kalenderblatt">';
-	// html += '<td class="wzahl">35</td>';
-	// html += '<td class="wochentage">28</td>';
-	// html += '<td class="wochentage">29</td>';
-	// html += '<td class="wochentage">30</td>';
-	// html += '<td class="wochentage">31</td>';
-	// html += '<td class="ausmonat">01</td>';
-	// html += '<td class="ausmonat">02</td>';
-	// html += '<td class="ausmonat">03</td>';
-	// html += '</tr>';
-
-
-
-
-	// function calendarHTML_cell(date) {
-	//     let html = "";
-	//     let cssClass = "";
-	//     let weekday = date.getDay();
-	//     if (weekday == 1) {
-	//         // Montag: Neue Zeile beginnen
-	//         html += "<tr>";
-	//         // und Zelle für die Kalenderwoche
-	//         html += '<td class="kw">' + getDHowManyWeekday(date) + "</td>";
-	// }
-	// let weekdayGerman = getWeekdayShortGerman(weekday);
-	// html += '<td class="' + cssClass + '">' + date.getDate() + "</td>";
-	// if (weekday == 0) {
-	//     html += "</tr>";
-	// }
-	// return html;
-
-
-
-
-
-	// function calendarHTML(datum) {
-	//     let firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-	//     let firstOfMonthWeekday = firstOfMonth.getDay();
-	//     let offsetStart;
-	//     if (firstOfMonthWeekday == 0) {
-	//         offsetStart = 6;
-	//     } else {
-	//         offsetStart = firstOfMonthWeekday - 1;
-	//     }
-	//     let firstOfCalendar = new Date(firstOfMonth);
-	//     firstOfCalendar.setDate(firstOfCalendar.getDate() - offsetStart);
-	//     let lastOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-	//     let lastOfMonthWeekday = lastOfMonth.getDay();
-	//     let offsetEnd;
-	//     if (lastOfMonthWeekday == 0) {
-	//         offsetEnd = 0;
-	//     } else {
-	//         offsetEnd = 7 - lastOfMonthWeekday;
-	//     }
-	//     let lastOfCalendar = new Date(lastOfMonth.getFullYear(), lastOfMonth.getMonth(), lastOfMonth.getDate() + offsetEnd);
-
-	//     let html = "";
-	//     html += calendarHTML_head(firstOfMonth);
-	//     let indexDate = new Date(firstOfCalendar);
-	//     while (indexDate <= lastOfCalendar) {
-	//         html += calendarHTML_cell(indexDate);
-	//         indexDate.setDate(indexDate.getDate() + 1);
-	//     }
-	//     html += calendarHTML_footer();
-
-
-
-
-	//     function calendarHTML_head(date) {  // Andreas sein Code für den Kalenderkopf
-	//         // console.log("calendarHTML_head: " + date);
-	//         let nameOfMonth = getMonthsInGerman(date.getMonth() + 1);
-	//         // console.log("calendarHTML_head: " + nameOfMonth);
-	//         let html =
-	//             `<table>
-	//                     <thead>
-	//                     <tr>
-	//                             <th colspan = "8">` +
-	//             nameOfMonth +
-	//             `</th>
-	//         </tr>
-	//                         <tr>
-	//                         <th class = "kw" > Kw </th>
-	//                             <th class = "mo" > Mo </th>
-	//                             <th class = "di" > Di </th>
-	//                             <th class = "mi" > Mi </th>
-	//                             <th class = "do" > Do </th>
-	//                             <th class = "fr" > Fr </th>
-	//                             <th class = "sa" > Sa </th>
-	//                             <th class = "so" > So </th>
-	//                             </tr>
-	//                     </thead>
-	//                     <tbody>`;
-	//         return html;
-	//     }
-
-
-	//     }
-	//     function calendarHTML_footer() {
-	//         html = "</tbody></table>";
-	//         return html;
-	//     }
-
-
